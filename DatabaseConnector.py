@@ -33,8 +33,8 @@ class DatabaseConnector(object):
     def connect_database(self):
         if self.connection is None:
             try:
-                connection = connector.connect(host='127.0.0.1', user='root', passwd='mysql',
-                                               db="fortnite_discovery_tracker")
+                connection = connector.connect(host='127.0.0.1', user='bot_fn_tracker', passwd='%G1965ob!Qz#',
+                                               db="fortnite_tracker")
                 if connection.is_connected():
                     self.connection = connection
                     db_info = connection.get_server_info()
@@ -48,8 +48,8 @@ class DatabaseConnector(object):
                 print("Error while connecting to MySQL", e)
                 print("Trying with vpn")
                 try:
-                    connection = connector.connect(host='127.0.0.1', user='root', passwd='mysql',
-                                                   db="fortnite_discovery_tracker")
+                    connection = connector.connect(host='127.0.0.1', user='bot_fn_tracker', passwd='%G1965ob!Qz',
+                                                   db="fortnite_tracker")
                     if connection.is_connected():
                         self.connection = connection
                         db_info = connection.get_server_info()

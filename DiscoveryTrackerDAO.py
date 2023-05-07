@@ -83,7 +83,7 @@ class DiscoveryTrackerDAO:
     def select_from_map_info(self, map_url):
         if self.db:
             self.db.connect_cursor()
-            SQL = f"""SELECT * FROM fortnite_discovery_tracker.MapInfo WHERE map_url = '{map_url}';"""
+            SQL = f"""SELECT * FROM fortnite_tracker.mapinfo WHERE map_url = '{map_url}';"""
             self.db.cursor.execute(SQL)
             result = self.db.cursor.fetchall()
             self.db.cursor.close()
@@ -93,10 +93,10 @@ class DiscoveryTrackerDAO:
         if self.db:
             try:
                 self.db.connect_cursor()
-                SQL = """INSERT INTO fortnite_discovery_tracker.Discovery
+                SQL = """INSERT INTO fortnite_tracker.discovery
                     (`index`, `map_name`, `map_url`, `category`, `position_category`, `current_player_number`, `datetime`)
                     VALUES (
-                    NULL, %s, %s, %s, %s, %s, now()
+                    NULL, %s, %s, %s, %s, %s, date_add(now(),interval 2 hour)
                     );"""
                 values = (infos.get_map_name(),
                           infos.get_map_url(),
@@ -114,10 +114,10 @@ class DiscoveryTrackerDAO:
         if self.db:
             try:
                 self.db.connect_cursor()
-                SQL = """INSERT INTO fortnite_discovery_tracker.MapInfo
+                SQL = """INSERT INTO fortnite_tracker.mapinfo
                     (`map_url`, `map_name`, `island_creator`, `map_tag1`, `map_tag2`, `map_tag3`, `map_tag4`, `map_description`, `datetime_insert`)
                     VALUES (
-                    %s, %s, %s, %s, %s, %s, %s, %s, now()
+                    %s, %s, %s, %s, %s, %s, %s, %s, date_add(now(),interval 2 hour)
                     );"""
                 values = (infos.get_map_url(),
                           infos.get_map_name(),
